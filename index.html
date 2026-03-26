@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心意制造局</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont;
+  background: linear-gradient(#fff7f5, #ffffff);
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* section */
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+/* 文字 */
+.text {
+  position: relative;
+  z-index: 2;
+}
+
+/* 图片 */
+.parallax-img {
+  width: 260px;
+  border-radius: 20px;
+  margin-top: 30px;
+  transition: 0.3s;
+}
+
+/* 背景光 */
+.bg {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: #ffdede;
+  filter: blur(120px);
+  z-index: 0;
+}
+
+/* 按钮 */
+.btn {
+  margin-top: 20px;
+  padding: 12px 26px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #f8c8c8, #f3a6a6);
+  color: white;
+  cursor: pointer;
+}
+
+/* tabs */
+.tabs button {
+  margin: 5px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #eee;
+}
+.active {
+  background: #f8c8c8;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 第一幕 -->
+<section>
+  <div class="bg" data-speed="0.2"></div>
+  <div class="text" data-speed="1">
+    <h1>有些情绪，很难说出口</h1>
+    <p>我们习惯沉默，也习惯错过表达。</p>
+  </div>
+</section>
+
+<!-- 第二幕 -->
+<section>
+  <div class="bg" data-speed="0.3"></div>
+  <div class="text" data-speed="1.2">
+    <h1>但它们一直存在</h1>
+    <p>在那些没有被说出的瞬间。</p>
+  </div>
+</section>
+
+<!-- 产品 -->
+<section>
+  <div class="text" data-speed="1">
+    <h2>记忆罐</h2>
+    <p>收藏那些未说出口的话</p>
+    <img class="parallax-img" data-speed="0.6"
+    src="https://images.unsplash.com/photo-1519681393784-d120267933ba">
+  </div>
+</section>
+
+<!-- 情绪互动 -->
+<section>
+  <div class="text" data-speed="1">
+    <h2>选择你的情绪</h2>
+    <div class="tabs">
+      <button onclick="showTab('love', this)" class="active">爱 ❤️</button>
+      <button onclick="showTab('friend', this)">友情 🤝</button>
+      <button onclick="showTab('heal', this)">治愈 🌿</button>
+    </div>
+    <p id="tabContent">表达爱，是一件温柔又勇敢的事情。</p>
+  </div>
+</section>
+
+<!-- 收尾 -->
+<section>
+  <div class="text" data-speed="1.2">
+    <h1>让每一份情绪，都被看见</h1>
+    <button class="btn">心意制造局</button>
+  </div>
+</section>
+
+<script>
+// 视差核心✨
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+
+  document.querySelectorAll("[data-speed]").forEach(el => {
+    const speed = el.getAttribute("data-speed");
+    el.style.transform = `translateY(${scrollY * speed * 0.1}px)`;
+  });
+});
+
+// 情绪切换
+function showTab(type, el){
+  let text = {
+    love: "表达爱，是一件温柔又勇敢的事情。",
+    friend: "友情，是无需多言却始终存在的陪伴。",
+    heal: "治愈，是在平凡生活中重新拥抱自己。"
+  };
+  document.getElementById("tabContent").innerText = text[type];
+
+  let buttons = document.querySelectorAll(".tabs button");
+  buttons.forEach(btn => btn.classList.remove("active"));
+  el.classList.add("active");
+}
+</script>
+
+</body>
+</html>
